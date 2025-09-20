@@ -1,3 +1,7 @@
+# Archived: detection.py
+# Moved from app/pages/ to disable Streamlit auto navigation
+
+# ...original code preserved...
 import streamlit as st
 from utils.data_loader import load_data, preprocess_data, train_models
 from utils.alerts import show_success
@@ -35,4 +39,3 @@ def show():
         show_metrics_table(results)
         best_model = max(results, key=lambda x: float(x['Accuracy'].rstrip('%')))
         st.success(f"🏆 Best performing model: {best_model['Model']} with {best_model['Accuracy']} accuracy")
-

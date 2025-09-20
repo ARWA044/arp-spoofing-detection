@@ -1,6 +1,6 @@
 import streamlit as st
 from components.sidebar import sidebar
-from pages import dashboard, detection, results
+from archived_pages  import dashboard, detection, results
 
 # Custom CSS for better styling
 st.markdown("""

@@ -1,3 +1,7 @@
+# Archived: results.py
+# Moved from app/pages/ to disable Streamlit auto navigation
+
+# ...original code preserved...
 import streamlit as st
 import numpy as np
 import pandas as pd
@@ -153,4 +157,3 @@ def show(prediction_mode=False, comparison_mode=False):
             )
             fig.update_layout(width=800, height=600)
             st.plotly_chart(fig, use_container_width=True)
-

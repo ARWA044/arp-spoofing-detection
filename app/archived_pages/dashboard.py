@@ -1,3 +1,7 @@
+# Archived: dashboard.py
+# Moved from app/pages/ to disable Streamlit auto navigation
+
+# ...original code preserved...
 import streamlit as st
 import pandas as pd
 from utils.data_loader import load_data, preprocess_data
