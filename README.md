@@ -1,66 +1,80 @@
+
 # 🛡️ ARP Spoofing Detection Dashboard
 
-A comprehensive machine learning-based system for detecting ARP spoofing attacks in network traffic data, featuring an interactive Streamlit dashboard.
+## What is ARP? What is ARP Spoofing?
+
+**Address Resolution Protocol (ARP)** is a fundamental protocol in computer networks that maps IP addresses to physical MAC addresses, allowing devices to communicate within a local network. However, ARP is inherently insecure and susceptible to attacks.
+
+**ARP Spoofing** (or ARP Poisoning) is a cyberattack where a malicious actor sends fake ARP messages onto a network. This tricks devices into associating the attacker’s MAC address with the IP address of another device (such as the gateway), enabling the attacker to intercept, modify, or block network traffic. ARP spoofing is a common technique used in Man-in-the-Middle (MitM) attacks and can lead to data theft, session hijacking, or denial of service.
+
+---
+
+## Project Overview
+
+This project provides a comprehensive, interactive dashboard for detecting ARP spoofing attacks using machine learning. Built with Streamlit, it enables:
+
+- **Data exploration and visualization**
+- **Training and evaluation of multiple ML models**
+- **Real-time predictions on custom network data**
+- **Side-by-side model comparison**
+
+The dashboard is designed for network engineers, security researchers, students, and anyone interested in network security and ML.
 
 ![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)
 ![Streamlit](https://img.shields.io/badge/Streamlit-1.28+-red.svg)
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
 
-## 🚀 Features
+---
 
-- **Interactive Dashboard**: Beautiful Streamlit web interface
-- **Multiple ML Models**: Random Forest, XGBoost, SVM, Isolation Forest, Autoencoder
-- **Real-time Predictions**: Input custom network features and get instant results
-- **Advanced Visualizations**: Interactive confusion matrices, ROC curves, t-SNE plots
-- **Model Comparison**: Side-by-side performance analysis
-- **Data Analysis**: Comprehensive dataset overview and statistics
+## 🚀 Quick Start
 
-## 📊 Dashboard Preview
-
-The dashboard includes 5 main sections:
-- **📊 Data Overview**: Dataset statistics and feature analysis
-- **🤖 Model Training**: Train and evaluate multiple ML models
-- **📈 Visualizations**: Interactive charts and plots
-- **🔮 Predictions**: Real-time ARP spoofing detection
-- **📋 Model Comparison**: Performance metrics comparison
-
-## 🛠️ Installation
-
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/ARWA044/arp-spoofing-detection.git
-   cd arp-spoofing-detection
-   ```
-
-2. **Install dependencies:**
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-3. **Run the dashboard:**
-   ```bash
-   python run_dashboard.py
-   ```
-   Or directly with Streamlit:
-   ```bash
-   streamlit run streamlit_dashboard.py
-   ```
-
-4. **Access the dashboard:**
-   Open your browser and go to: `http://localhost:8501`
-
-## 📁 Project Structure
-
+### 1. Install Dependencies
+```bash
+pip install -r requirements.txt
 ```
-arp-spoofing-detection/
-├── streamlit_dashboard.py      # Main dashboard application
-├── run_dashboard.py           # Dashboard launcher script
-├── requirements.txt           # Python dependencies
-├── ARP_Spoofing_train.pcap.csv # Training data
-├── ARP_Spoofing_test.pcap.csv  # Test data
-├── README.md                  # This file
-└── DASHBOARD_README.md        # Detailed dashboard documentation
+
+### 2. Run the Dashboard
+```bash
+python run_dashboard.py
 ```
+Or directly with Streamlit:
+```bash
+streamlit run streamlit_dashboard.py
+```
+
+### 3. Access the Dashboard
+Open your browser and go to: `http://localhost:8501`
+
+---
+
+## 📊 Dashboard Features
+
+1. **Data Overview** 📊
+   - Dataset statistics and sample counts
+   - Label distribution visualization
+   - Feature importance analysis
+   - Data quality metrics
+2. **Model Training** 🤖
+   - Train multiple ML models: Random Forest, XGBoost, SVM, Isolation Forest, Autoencoder
+   - Real-time performance metrics
+   - Model comparison table
+3. **Visualizations** 📈
+   - Interactive confusion matrices
+   - ROC curves with AUC scores
+   - t-SNE data visualization
+   - Feature distribution plots
+4. **Real-time Predictions** 🔮
+   - Input custom network traffic features
+   - Get predictions from all trained models
+   - Ensemble voting system
+   - Confidence scores
+5. **Model Comparison** 📋
+   - Side-by-side performance metrics
+   - Interactive comparison charts
+   - Model recommendations
+   - Best model identification
+
+---
 
 ## 🔧 Technical Details
 
@@ -82,39 +96,123 @@ arp-spoofing-detection/
 - Handling of infinite and missing values
 - PCA for autoencoder dimensionality reduction
 
-## 📈 Usage Examples
+---
 
-### Quick Start
-1. Run the dashboard: `python run_dashboard.py`
-2. Navigate to "🤖 Model Training" and click "Train All Models"
-3. Go to "🔮 Predictions" to test with custom data
-4. Check "📈 Visualizations" for model performance analysis
+## 📁 File Structure
+
+
+```
+arp-spoofing-detection/
+├── app/                       # Modularized dashboard code
+├── core/                      # Core ML and network utilities
+├── data/                      # Training and test data
+├── requirements.txt           # Python dependencies
+├── run_dashboard.py           # Dashboard launcher script
+├── streamlit_dashboard.py     # (Legacy) monolithic dashboard
+└── README.md                  # Project documentation
+```
+
+---
+
+## 🎯 Usage Examples
+
+### Training Models
+1. Navigate to "🤖 Model Training" page
+2. Click "Train All Models" button
+3. View performance metrics table
 
 ### Making Predictions
-Input your network traffic features:
-- **Rate**: Packet rate (e.g., 100.0)
-- **ARP**: ARP protocol flag (0 or 1)
-- **IAT**: Inter-arrival time (e.g., 0.01)
+1. Go to "🔮 Predictions" page
+2. Input your network traffic features:
+   - Rate: Packet rate (e.g., 100.0)
+   - ARP: ARP protocol flag (0 or 1)
+   - IAT: Inter-arrival time (e.g., 0.01)
+3. View predictions from all models
 
-The dashboard will show predictions from all trained models with confidence scores.
+### Analyzing Results
+1. Check "📈 Visualizations" for confusion matrices and ROC curves
+2. Use "📋 Model Comparison" to compare model performance
+3. Review "📊 Data Overview" for dataset insights
+
+---
+
+## 🔍 Model Performance Metrics
+
+The dashboard automatically calculates and displays:
+- **Accuracy**: Overall correctness
+- **Precision**: True positives / (True positives + False positives)
+- **Recall**: True positives / (True positives + False negatives)
+- **F1-Score**: Harmonic mean of precision and recall
+
+---
+
+## 🛠️ Customization
+
+### Adding New Models
+1. Add model training code in `train_models()` function
+2. Include model in the models dictionary
+3. Add prediction logic in the predictions section
+
+### Modifying Features
+1. Update the `features` list in `preprocess_data()`
+2. Adjust the labeling heuristics in `label_row()`
+3. Update the prediction input interface
+
+### Styling
+- Modify the CSS in the `st.markdown()` section
+- Update colors and layout in Plotly figures
+- Customize the page configuration
+
+---
+
+## 🐛 Troubleshooting
+
+### Common Issues
+1. **Data not loading**: Ensure CSV files are in the correct directory
+2. **Models not training**: Check that all dependencies are installed
+3. **Visualizations not showing**: Verify Plotly is installed correctly
+
+### Performance Tips
+- Use the cached functions for better performance
+- Reduce t-SNE computation for large datasets
+- Consider model selection for faster predictions
+
+---
+
+## 📈 Future Enhancements
+
+- Real-time data streaming integration
+- Model persistence and loading
+- Advanced feature engineering
+- Hyperparameter tuning interface
+- Export functionality for results
+- Alert system for detected attacks
+
+---
 
 ## 🤝 Contributing
 
 1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly
+5. Submit a pull request
+
+---
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is open source and available under the MIT License.
+
+---
 
 ## 🙏 Acknowledgments
 
 - Dataset: ARP spoofing detection dataset
 - Libraries: Streamlit, scikit-learn, XGBoost, Plotly
 - Inspiration: Network security and machine learning community
+
+---
 
 ## 📞 Contact
 
