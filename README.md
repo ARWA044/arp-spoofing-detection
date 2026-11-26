@@ -40,11 +40,7 @@ pip install -r requirements.txt
 
 ### 2. Run the Dashboard
 ```bash
-python run_dashboard.py
-```
-Or directly with Streamlit:
-```bash
-streamlit run streamlit_dashboard.py
+python -m streamlit run app/app.py
 ```
 
 
@@ -117,12 +113,13 @@ Open your browser and go to: `http://localhost:8501`
 
 ```
 arp-spoofing-detection/
-├── app/                       # Modularized dashboard code
+├── app/app.py                 # Streamlit entry point
 ├── core/                      # Core ML and network utilities
 ├── data/                      # Training and test data
 ├── requirements.txt           # Python dependencies
-├── run_dashboard.py           # Dashboard launcher script
-├── streamlit_dashboard.py     # (Legacy) monolithic dashboard
+├── tests/                     # Test modules
+
+
 └── README.md                  # Project documentation
 ```
 
@@ -235,3 +232,7 @@ If you have any questions or suggestions, please feel free to open an issue or c
 ---
 
 ⭐ **Star this repository if you found it helpful!**
+
+## Evaluation limitations
+
+Heuristic labels are not independent attack ground truth. Reported metrics measure agreement with the labeling procedure and do not establish real-world detection accuracy. Use only authorized network data.
