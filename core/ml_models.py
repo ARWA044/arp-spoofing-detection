@@ -19,7 +19,7 @@ def train_all_models(X_train, y_train, X_test, y_test):
     models['Random Forest'] = rf
     predictions['Random Forest'] = {'pred': rf_pred, 'proba': rf_proba}
 
-    xgb = XGBClassifier(eval_metric='logloss', use_label_encoder=False, random_state=42)
+    xgb = XGBClassifier(eval_metric='logloss', random_state=42)
     xgb.fit(X_train, y_train)
     xgb_pred = xgb.predict(X_test)
     xgb_proba = xgb.predict_proba(X_test)[:, 1]
@@ -47,9 +47,10 @@ def train_all_models(X_train, y_train, X_test, y_test):
     autoencoder.fit(X_train_pca, X_train_pca)
     reconstructions = autoencoder.predict(X_test_pca)
     mse = np.mean((reconstructions - X_test_pca) ** 2, axis=1)
-    threshold = np.percentile(mse, 99)
+    train_errors = np.mean((autoencoder.predict(X_train_pca) - X_train_pca) ** 2, axis=1)
+    threshold = float(np.percentile(train_errors, 99))
     ae_pred = (mse > threshold).astype(int)
-    ae_proba = mse / np.max(mse)
+    ae_proba = mse  # continuous reconstruction error, not probability
     models['Autoencoder'] = {'model': autoencoder, 'pca': pca, 'threshold': threshold}
     predictions['Autoencoder'] = {'pred': ae_pred, 'proba': ae_proba}
 
